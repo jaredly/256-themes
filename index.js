@@ -14,7 +14,7 @@ angular.module('MyApp', [])
     }
     var tpl = {
       quizes: q,
-      page: 'login',
+      page: 'main',
       theme: {
         cls: 'default-theme',
         name: 'Default'

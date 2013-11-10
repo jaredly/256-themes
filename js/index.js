@@ -340,7 +340,7 @@ angular.module('MyApp', [])\n\
     }\n\
     var tpl = {\n\
       quizes: q,\n\
-      page: 'login',\n\
+      page: 'main',\n\
       theme: {\n\
         cls: 'default-theme',\n\
         name: 'Default'\n\
