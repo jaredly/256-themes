@@ -1,0 +1,59 @@
+!!!
+html
+  head
+    // bootstrap theme
+    link(rel='stylesheet', href='bootstrap/css/bootstrap.css')
+
+    // non-component javascript libs
+    script(src='js/angular.js')
+
+    // my actual code
+    link(rel='stylesheet', href='css/index.css')
+    script(src='js/index.js')
+    script.
+      window.addEventListener('load', function () {
+        require('b')(document)
+      })
+  body
+    div#main(ng-controller="MainController", ng-switch="page", class="{{ theme.cls }}")
+      div.page.login-page(ng-switch-when="login")
+        h1.title Quiznatomy
+        .login-box.form
+          input.form-control.bold-input(ng-model='username', type='text', placeholder='BYU ID')
+          input.form-control.bold-input(ng-model='password', type='password', placeholder='Password')
+          .btn.btn-default.login(ng-click='$parent.page = "main"') Login
+        .footer
+          &copy; 2013 Pirate Pandas
+      div.page.home-page(ng-switch-when="main")
+        .btn.btn-default.pull-right.logout(ng-click="$parent.page = 'login'") Logout
+        | Theme: 
+        .btn-group
+          .btn.btn-default(ng-class='{active: theme.cls === name.cls}',
+                           ng-repeat='name in themes',
+                           ng-click='$parent.$parent.theme = name') {{ name.name }}
+        br
+        br
+        //select(ng-model='focusedQuiz', ng-options='quiz.name + " " + quiz.date for quiz in quizes')
+        .select-dropdown(ng-class='{ opened: opened }')
+          .item.selected-item(ng-click='opened = !opened')
+            | {{ focusedQuiz.name }}
+            span.date {{ focusedQuiz.date }}
+            i.glyphicon.glyphicon-chevron-down.down-icon
+          ul.dropdown
+            li.item(ng-repeat='quiz in quizes', ng-class="{ selected: quiz.name == focusedQuiz.name }", ng-click='$parent.focusedQuiz=quiz; $parent.opened = false')
+              | {{ quiz.name }}
+              span.date {{ quiz.date }}
+        div.mastered
+          | Mastered {{ focusedQuiz.mastered }} / {{ focusedQuiz.total }}
+          .btn.btn-default.reset-mastered(ng-click='focusedQuiz.mastered = 0') Small Button
+        input.form-control.search-box(placeholder='Search Box', type='text')
+        .btn.btn-default.large-button Larger Button
+        br
+        br
+        .btn-group
+          .btn.btn-default(ng-class='{active: selectedOption === option}',
+                           ng-repeat='option in ["One", "More", "Option"]',
+                           ng-click='$parent.selectedOption = option') {{ option }}
+        br
+        br
+        .btn.btn-default.accent-btn Accent Button

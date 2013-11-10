@@ -1,0 +1,16 @@
+{
+  "name": "b",
+  "repo": "a/b",
+  "description": "c",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "jaredly/xon": "*"
+  },
+  "development": {},
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": [
+    "index.js"
+  ]
+}
